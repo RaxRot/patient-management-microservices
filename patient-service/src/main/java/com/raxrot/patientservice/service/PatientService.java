@@ -1,5 +1,6 @@
 package com.raxrot.patientservice.service;
 
+import com.raxrot.patientservice.dto.PatientRequestDTO;
 import com.raxrot.patientservice.dto.PatientResponseDTO;
 import com.raxrot.patientservice.mapper.PatientMapper;
 import com.raxrot.patientservice.model.Patient;
@@ -13,6 +14,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PatientService {
     private final PatientRepository patientRepository;
+
+    public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO) {
+        Patient newPatient = PatientMapper.toModel(patientRequestDTO);
+        Patient savedPatient = patientRepository.save(newPatient);
+        return PatientMapper.toDto(savedPatient);
+    }
 
     public List<PatientResponseDTO> getAllPatients() {
        List<Patient>patients = patientRepository.findAll();
