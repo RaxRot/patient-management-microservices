@@ -28,5 +28,5 @@ public class Patient {
     @NotNull
     private LocalDate dateOfBirth;
     @NotNull
-    private LocalDate registerDate;
+    private LocalDate registeredDate;
 }
