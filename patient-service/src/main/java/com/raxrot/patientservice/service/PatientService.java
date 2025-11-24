@@ -20,7 +20,7 @@ public class PatientService {
     public PatientResponseDTO createPatient(PatientRequestDTO patientRequestDTO) {
         if(patientRepository.existsByEmail(patientRequestDTO.getEmail())){
             throw new ApiException("Patient with email " + patientRequestDTO.getEmail() + " already exists",
-                    HttpStatus.BAD_REQUEST);
+                    HttpStatus.CONFLICT);
         }
 
         Patient newPatient = PatientMapper.toModel(patientRequestDTO);
