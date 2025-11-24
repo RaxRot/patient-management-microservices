@@ -1,12 +1,13 @@
 package com.raxrot.patientservice.controller;
 
+import com.raxrot.patientservice.dto.PatientRequestDTO;
 import com.raxrot.patientservice.dto.PatientResponseDTO;
 import com.raxrot.patientservice.service.PatientService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,6 +16,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PatientController {
     private final PatientService patientService;
+
+    @PostMapping
+    public ResponseEntity<PatientResponseDTO> createPatient(@Valid @RequestBody PatientRequestDTO patientRequestDTO){
+        return new ResponseEntity<>(patientService.createPatient(patientRequestDTO), HttpStatus.CREATED);
+    }
 
     @GetMapping
     public ResponseEntity<List<PatientResponseDTO>> getAllPatients(){
