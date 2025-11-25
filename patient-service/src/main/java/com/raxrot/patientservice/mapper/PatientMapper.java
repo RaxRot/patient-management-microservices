@@ -2,6 +2,7 @@ package com.raxrot.patientservice.mapper;
 
 import com.raxrot.patientservice.dto.PatientRequestDTO;
 import com.raxrot.patientservice.dto.PatientResponseDTO;
+import com.raxrot.patientservice.dto.PatientUpdateDTO;
 import com.raxrot.patientservice.model.Patient;
 
 import java.time.LocalDate;
@@ -24,6 +25,14 @@ public class PatientMapper {
         patient.setAddress(dto.getAddress());
         patient.setDateOfBirth(parseDate(dto.getDateOfBirth()));
         patient.setRegisteredDate(parseDate(dto.getRegisteredDate()));
+        return patient;
+    }
+
+    public static Patient toModel(Patient patient,PatientUpdateDTO dto){
+        patient.setName(dto.getName());
+        patient.setEmail(dto.getEmail().trim());
+        patient.setAddress(dto.getAddress());
+        patient.setDateOfBirth(parseDate(dto.getDateOfBirth()));
         return patient;
     }
 

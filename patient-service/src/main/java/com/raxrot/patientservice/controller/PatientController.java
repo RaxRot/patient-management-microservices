@@ -2,6 +2,7 @@ package com.raxrot.patientservice.controller;
 
 import com.raxrot.patientservice.dto.PatientRequestDTO;
 import com.raxrot.patientservice.dto.PatientResponseDTO;
+import com.raxrot.patientservice.dto.PatientUpdateDTO;
 import com.raxrot.patientservice.service.PatientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/patients")
@@ -25,5 +27,11 @@ public class PatientController {
     @GetMapping
     public ResponseEntity<List<PatientResponseDTO>> getAllPatients(){
         return ResponseEntity.ok(patientService.getAllPatients());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PatientResponseDTO> updatePatient(@PathVariable UUID id,
+                                                            @Valid @RequestBody PatientUpdateDTO patientRequestDTO){
+        return ResponseEntity.ok(patientService.updatePatient(id, patientRequestDTO));
     }
 }
